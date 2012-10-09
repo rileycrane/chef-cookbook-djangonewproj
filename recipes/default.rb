@@ -5,7 +5,7 @@ python_pip "virtualenvwrapper" do
   not_if "test -e /usr/local/bin/virtualenvwrapper.sh"
 end
 
-bash "Configure virtualenvwrapper" do
+bash "configure virtualenvwrapper" do
   user "vagrant"
   code <<-EOH
   echo "export WORKON_HOME=/home/vagrant/.virtualenvs" >> /home/vagrant/.profile
@@ -25,7 +25,7 @@ python_virtualenv "/home/vagrant/.virtualenvs/myproject" do
 end
 
 # Create Bash Aliases
-bash "Create aliases" do
+bash "create aliases" do
   user "vagrant"
   code <<-EOH
     echo "alias cw='compass watch myproject/static_media/stylesheets'" >> /home/vagrant/.profile
@@ -45,8 +45,8 @@ execute 'create dir' do
   command "git config --global merge.summary true"
 end
 
-# Create symlinks for PIL
-bash "Create symlinks" do
+# Create Symlinks for PIL
+bash "create symlinks" do
   user "vagrant"
   code <<-EOH
     sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
@@ -55,8 +55,8 @@ bash "Create symlinks" do
   EOH
 end
 
-# Create the database
-bash "Create database" do
+# Create the Database
+bash "create database" do
   user "vagrant"
   code <<-EOH
     echo "CREATE USER django_login WITH SUPERUSER PASSWORD 'secret';" | sudo -u postgres psql
