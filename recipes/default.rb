@@ -49,8 +49,18 @@ end
 bash "Create symlinks" do
   user "vagrant"
   code <<-EOH
-    ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
-    ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
-    ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib
+    sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
+    sudo ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
+    sudo ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib
   EOH
+end
+
+# Create the database
+bash "Create database" do
+  user "vagrant"
+  code <<-EOH
+    echo "CREATE USER django_login WITH SUPERUSER PASSWORD 'secret';" | sudo -u postgres psql
+    sudo -u postgres createdb -O django_login -E UTF8 django_db
+  EOH
+  not_if "sudo -u postgres psql -l | grep django_db"
 end
