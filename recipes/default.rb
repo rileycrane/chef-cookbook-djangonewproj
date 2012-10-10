@@ -83,8 +83,8 @@ gems.each do |gem|
   end
 end
 
-# Load virtualenv requirements
-bash "Initial loading of virtualenv requirements" do
+# Configure the project
+bash "configure the project" do
   user "vagrant"
   code <<-EOH
     source /vagrant/.virtualenvs/djangoproj/bin/activate
