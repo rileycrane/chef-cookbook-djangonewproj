@@ -7,20 +7,20 @@ end
 bash "configure virtualenvwrapper" do
   user "vagrant"
   code <<-EOH
-    echo "export WORKON_HOME=/home/vagrant/.virtualenvs" >> /home/vagrant/.profile
+    echo "export WORKON_HOME=/vagrant/.virtualenvs" >> /home/vagrant/.profile
     echo "source /usr/local/bin/virtualenvwrapper.sh" >> /home/vagrant/.profile
-    echo "workon myproject" >> /home/vagrant/.profile
-    echo "cd /home/vagrant/.virtualenvs/myproject" >> /home/vagrant/.profile
+    echo "workon djangoproj" >> /home/vagrant/.profile
+    echo "cd /vagrant/.virtualenvs/djangoproj" >> /home/vagrant/.profile
   EOH
   not_if "cat /home/vagrant/.profile | grep virtualenvwrapper.sh"
 end
 
 # Create the Virtual Environment
-python_virtualenv "/home/vagrant/.virtualenvs/myproject" do
+python_virtualenv "/vagrant/.virtualenvs/djangoproj" do
   interpreter "python2.7"
   owner "vagrant"
   action :create
-  not_if "test -d /home/vagrant/.virtualenvs/myproject"
+  not_if "test -d /vagrant/.virtualenvs/djangoproj"
 end
 
 # Create Bash Aliases
@@ -84,3 +84,16 @@ gems.each do |gem|
     action :install
   end
 end
+
+# Load virtualenv requirements
+bash "Initial loading of virtualenv requirements" do
+  user "vagrant"
+  code <<-EOH
+    source /vagrant/.virtualenvs/djangoproj/bin/activate
+    cd /vagrant/.virtualenvs/djangoproj
+    pip install -r https://raw.github.com/jbergantine/django-newproj/master/default-requirements.txt
+    django-admin.py startproject --template=https://github.com/jbergantine/django-newproj-template/zipball/master --extension=py,rst myproject
+  EOH
+  not_if "test -d /vagrant/.virtualenvs/djangoproject/lib/python2.7/site-packages/django"
+end
+
