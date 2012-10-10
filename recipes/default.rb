@@ -10,7 +10,7 @@ bash "configure virtualenvwrapper" do
     echo "export WORKON_HOME=/home/vagrant/.virtualenvs" >> /home/vagrant/.profile
     echo "source /usr/local/bin/virtualenvwrapper.sh" >> /home/vagrant/.profile
     echo "workon myproject" >> /home/vagrant/.profile
-    echo "cd /myproject" >> /home/vagrant/.profile
+    echo "cd /home/vagrant/.virtualenvs/myproject" >> /home/vagrant/.profile
   EOH
   not_if "cat /home/vagrant/.profile | grep virtualenvwrapper.sh"
 end
