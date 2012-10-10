@@ -30,6 +30,8 @@ bash "create aliases" do
     echo "alias sh='python manage.py shell'" >> /home/vagrant/.profile
     echo "alias rs='python manage.py runserver [::]:8000'" >> /home/vagrant/.profile
     echo "alias dj='python manage.py '" >> /home/vagrant/.profile
+    echo "alias py='python'" >> /home/vagrant/.profile
+    echo "alias pyclean='find . -name "*.pyc" -delete'" >> /home/vagrant/.profile
   EOH
   not_if "cat /home/vagrant/.profile | grep compass"
 end
