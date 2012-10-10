@@ -36,7 +36,7 @@ bash "create aliases" do
 end
 
 # Configure Git
-bash 'configure git' do
+bash "configure git" do
   user "vagrant"
   code <<-EOH
     git config --global color.branch auto
