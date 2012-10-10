@@ -1,5 +1,4 @@
 # Setup VirtualenvWrapper
-
 python_pip "virtualenvwrapper" do
   action :install
   not_if "test -e /usr/local/bin/virtualenvwrapper.sh"
