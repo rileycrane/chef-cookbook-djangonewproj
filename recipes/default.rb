@@ -37,45 +37,50 @@ end
 
 # Configure Git
 bash "configure git" do
-  user "vagrant"
   code <<-EOH
-    sudo git config --global color.branch auto
-    sudo git config --global color.diff auto
-    sudo git config --global color.interactive auto
-    sudo git config --global color.status auto
-    sudo git config --global merge.summary true
-    sudo git config --global alias.st status
-    sudo git config --global alias.ci commit
-    sudo git config --global alias.co checkout
-    sudo git config --global alias.br branch
+    git config --global color.branch auto
+    git config --global color.diff auto
+    git config --global color.interactive auto
+    git config --global color.status auto
+    git config --global merge.summary true
+    git config --global alias.st status
+    git config --global alias.ci commit
+    git config --global alias.co checkout
+    git config --global alias.br branch
   EOH
+  not_if "git config --get color.diff"
 end
 
 # Create Symlinks for PIL
 bash "create symlinks" do
-  user "vagrant"
   code <<-EOH
     sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
     sudo ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
     sudo ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib
   EOH
+  not_if "ls /usr/lib | grep libz.so"
 end
 
 # Create the Database
 bash "create database" do
-  user "vagrant"
+  #user "vagrant"
   code <<-EOH
     echo "CREATE USER django_login WITH SUPERUSER PASSWORD 'secret';" | sudo -u postgres psql
-    sudo -u postgres createdb -O django_login -E UTF8 django_db
+    sudo -u postgres createdb -O django_login -E UTF8 --lc-ctype=en_US.utf8 --lc-collate=en_US.utf8 -T template0 django_db
   EOH
   not_if "sudo -u postgres psql -l | grep django_db"
 end
 
 # Install Compass / Susy
-bash "install sass" do
-  user "vagrant"
-  code <<-EOH
-    sudo gem install compass susy
-  EOH
-  not_if "gem list | grep compass"
+gems = Array.new
+
+gems |= %w/
+  compass
+  susy
+/
+
+gems.each do |gem|
+  gem_package gem do
+    action :install
+  end
 end
