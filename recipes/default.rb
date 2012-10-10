@@ -10,7 +10,6 @@ bash "configure virtualenvwrapper" do
     echo "export WORKON_HOME=/vagrant/.virtualenvs" >> /home/vagrant/.profile
     echo "source /usr/local/bin/virtualenvwrapper.sh" >> /home/vagrant/.profile
     echo "workon djangoproj" >> /home/vagrant/.profile
-    echo "cd /vagrant/.virtualenvs/djangoproj" >> /home/vagrant/.profile
   EOH
   not_if "cat /home/vagrant/.profile | grep virtualenvwrapper.sh"
 end
@@ -91,9 +90,32 @@ bash "Initial loading of virtualenv requirements" do
   code <<-EOH
     source /vagrant/.virtualenvs/djangoproj/bin/activate
     cd /vagrant/.virtualenvs/djangoproj
-    pip install -r https://raw.github.com/jbergantine/django-newproj/master/default-requirements.txt
+    pip install -r https://raw.github.com/jbergantine/django-newproj-template/master/stable-req.txt
     django-admin.py startproject --template=https://github.com/jbergantine/django-newproj-template/zipball/master --extension=py,rst myproject
+    cd myproject
+    chmod u+x manage.py
+    git init
+    cd .git/hooks
+    wget https://gist.github.com/raw/3868519/aa2c85600d760912f3cb27cb79c82eebd6f9b4c8/post-merge -O post-merge
+    cd ../../
+    git add -A
+    git commit -am "initial commit"
+    cd myproject
+    mkdir media static static_media
+    cd static_media
+    compass create stylesheets --syntax sass -r susy -u susy
+    cd stylesheeets/sass
+    rm _base.sass screen.sass
+    git clone https://github.com/jbergantine/compass-gesso/ .
+    touch ie.sass
+    cd ../../
+    mkdir -p javascripts/libs
+    cd javascripts/libs
+    wget http://code.jquery.com/jquery-1.8.1.min.js
+    wget https://raw.github.com/gist/3868451/a313411f080ab542a703b805e4d1494bcbf23a0b/gistfile1.js -O modernizr.js
+    echo "export DJANGO_SETTINGS_MODULE=myproject.settings.dev" >> $VIRTUAL_ENV/bin/postactivate
+    echo "unset DJANGO_SETTINGS_MODULE" >> $VIRTUAL_ENV/bin/postdeactivate
+    echo "cd /vagrant/.virtualenvs/djangoproj/myproject" >> /home/vagrant/.profile
   EOH
-  not_if "test -d /vagrant/.virtualenvs/djangoproject/lib/python2.7/site-packages/django"
+  not_if "test -d /vagrant/.virtualenvs/djangoproj/lib/python2.7/site-packages/django"
 end
-
