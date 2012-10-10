@@ -37,12 +37,19 @@ bash "create aliases" do
 end
 
 # Configure Git
-execute 'create dir' do
-  command "git config --global color.branch auto"
-  command "git config --global color.diff auto"
-  command "git config --global color.interactive auto"
-  command "git config --global color.status auto"
-  command "git config --global merge.summary true"
+bash 'configure git' do
+  user "vagrant"
+  code <<-EOH
+    git config --global color.branch auto
+    git config --global color.diff auto
+    git config --global color.interactive auto
+    git config --global color.status auto
+    git config --global merge.summary true
+    git config --global alias.st status
+    git config --global alias.ci commit
+    git config --global alias.co checkout
+    git config --global alias.br branch
+  EOH
 end
 
 # Create Symlinks for PIL
