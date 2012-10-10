@@ -64,3 +64,12 @@ bash "create database" do
   EOH
   not_if "sudo -u postgres psql -l | grep django_db"
 end
+
+# Install Compass / Susy
+bash "install sass" do
+  user "vagrant"
+  code <<-EOH
+    sudo gem install compass susy
+  EOH
+  not_if "gem list | grep compass"
+end
