@@ -27,7 +27,7 @@ bash "create aliases" do
   user "vagrant"
   code <<-EOH
     echo "alias cw='compass watch myproject/static_media/stylesheets'" >> /home/vagrant/.profile
-    echo "alias py='python manage.py shell'" >> /home/vagrant/.profile
+    echo "alias sh='python manage.py shell'" >> /home/vagrant/.profile
     echo "alias rs='python manage.py runserver [::]:8000'" >> /home/vagrant/.profile
     echo "alias dj='python manage.py '" >> /home/vagrant/.profile
   EOH
