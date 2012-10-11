@@ -34,7 +34,7 @@ A stylesheet specifically for print styling. Meant to be used in a way that styl
 
 A stylesheet specifically for dealing with modifications necessary for Internet Explorer. Meant to be used in a way that styles defined here override screen.sass.
 
-Because this template uses SASS with Compass and Susy you'll have to compile the ``.sass`` files to ``.css`` files. You can use ``compass watch`` or ``compass compile`` as documented in the [Compass documentation](http://compass-style.org/help/tutorials/command-line/).
+Because this template uses SASS with Compass and Susy you'll have to compile the ``.sass`` files to ``.css`` files. You can use ``compass watch`` or ``compass compile`` as documented in the [Compass documentation](http://compass-style.org/help/tutorials/command-line/). There's even a [bash alias](#compass) setup to facilitate ease of compiling.
 
 ## JavaScript Files Created
 
