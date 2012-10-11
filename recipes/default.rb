@@ -98,8 +98,8 @@ bash "install packages and start project" do
   code <<-EOH
     virtualenv /home/vagrant/.virtualenvs/djangoproj
     source /home/vagrant/.virtualenvs/djangoproj/bin/activate
-    cd /vagrant
     pip install -r https://raw.github.com/jbergantine/django-newproj-template/master/stable-req.txt
+    cd /vagrant
     django-admin.py startproject --template=https://github.com/jbergantine/django-newproj-template/zipball/master --extension=py,rst myproject
     cd /vagrant/myproject
     chmod u+x manage.py
