@@ -96,6 +96,7 @@ bash "configure the project" do
     git init
     cd /vagrant/.virtualenvs/djangoproj.git/hooks
     wget https://gist.github.com/raw/3868519/aa2c85600d760912f3cb27cb79c82eebd6f9b4c8/post-merge -O post-merge
+    chmod u+x post-merge
     cd /vagrant/.virtualenvs/djangoproj/myproject
     chmod u+x manage.py
     cd /vagrant/.virtualenvs/djangoproj/myproject/myproject
