@@ -58,14 +58,13 @@ The following bash aliases were added to the shell.
 <table>
     <tr>
         <th>dj</th>
-        <td><pre>python manage.py</pre></td>
+        <td>
+            <pre>python manage.py</pre>
+            <p>Example usage, interact with the Django shell:</p>
+            <pre>dj shell</pre>
+        </td>
     </tr>
 </table>
-
-Example usage, interact with the Django shell:
-
-    dj shell
-
 <table>
     <tr>
         <th>rs</th>
