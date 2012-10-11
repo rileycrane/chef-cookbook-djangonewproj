@@ -77,6 +77,39 @@ The following bash aliases are added to the shell.
     </tr>
 </table>
 
+### Git
+
+<table>
+    <tr>
+        <th>ga</th>
+        <td><pre>git add</pre></td>
+    </tr>
+    <tr>
+        <th>gb</th>
+        <td><pre>git branch</pre></td>
+    </tr>
+    <tr>
+        <th>gco</th>
+        <td><pre>git checkout</pre></td>
+    </tr>
+    <tr>
+        <th>gl</th>
+        <td><pre>git pull</pre></td>
+    </tr>
+    <tr>
+        <th>gp</th>
+        <td><pre>git push</pre></td>
+    </tr>
+    <tr>
+        <th>gst</th>
+        <td><pre>git status</pre></td>
+    </tr>
+    <tr>
+        <th>gss</th>
+        <td><pre>git status -s</pre></td>
+    </tr>
+</table>
+
 ### Python
 
 <table>
