@@ -81,6 +81,24 @@ The following bash aliases are added to the shell.
 
 <table>
     <tr>
+        <th>br</th>
+        <td><pre>branch</pre></td>
+    </tr>
+    <tr>
+        <th>ci</th>
+        <td><pre>commit</pre></td>
+    </tr>
+    <tr>
+        <th>co</th>
+        <td><pre>checkout</pre></td>
+    </tr>
+    <tr>
+        <th>st</th>
+        <td><pre>status</pre></td>
+    </tr>
+</table>
+<table>
+    <tr>
         <th>ga</th>
         <td><pre>git add</pre></td>
     </tr>
@@ -107,24 +125,6 @@ The following bash aliases are added to the shell.
     <tr>
         <th>gss</th>
         <td><pre>git status -s</pre></td>
-    </tr>
-</table>
-<table>
-    <tr>
-        <th>br</th>
-        <td><pre>branch</pre></td>
-    </tr>
-    <tr>
-        <th>ci</th>
-        <td><pre>commit</pre></td>
-    </tr>
-    <tr>
-        <th>co</th>
-        <td><pre>checkout</pre></td>
-    </tr>
-    <tr>
-        <th>st</th>
-        <td><pre>status</pre></td>
     </tr>
 </table>
 
