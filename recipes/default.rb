@@ -29,9 +29,9 @@ bash "create aliases" do
     echo "alias cw='compass watch myproject/static_media/stylesheets'" >> /home/vagrant/.profile
     echo "alias sh='python manage.py shell'" >> /home/vagrant/.profile
     echo "alias rs='python manage.py runserver [::]:8000'" >> /home/vagrant/.profile
-    echo "alias dj='python manage.py '" >> /home/vagrant/.profile
+    echo "alias dj='python manage.py'" >> /home/vagrant/.profile
     echo "alias py='python'" >> /home/vagrant/.profile
-    echo "alias pyclean='find . -name "*.pyc" -delete'" >> /home/vagrant/.profile
+    echo "alias pyclean='find . -name \"*.pyc\" -delete'" >> /home/vagrant/.profile
     echo "alias ga='git add'" >> /home/vagrant/.profile
     echo "alias gb='git branch'" >> /home/vagrant/.profile
     echo "alias gco='git checkout'" >> /home/vagrant/.profile
