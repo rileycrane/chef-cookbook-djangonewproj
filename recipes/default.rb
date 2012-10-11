@@ -92,39 +92,52 @@ gems.each do |gem|
   end
 end
 
-# Configure the project
-bash "configure the project" do
+# Install Python packages and start the Django project
+bash "install packages and start project" do
   user "vagrant"
   code <<-EOH
     source /vagrant/.virtualenvs/djangoproj/bin/activate
     cd /vagrant/.virtualenvs/djangoproj
     pip install -r https://raw.github.com/jbergantine/django-newproj-template/master/stable-req.txt
     django-admin.py startproject --template=https://github.com/jbergantine/django-newproj-template/zipball/master --extension=py,rst myproject
-    git init
-    cd /vagrant/.virtualenvs/djangoproj.git/hooks
-    wget https://raw.github.com/gist/3870080/c5a55674901db6b901cf3f6a4a11b28b0dde2738/gistfile1.sh -O post-merge
-    chmod u+x post-merge
     cd /vagrant/.virtualenvs/djangoproj/myproject
     chmod u+x manage.py
-    cd /vagrant/.virtualenvs/djangoproj/myproject/myproject
-    mkdir media static static_media
-    cd /vagrant/.virtualenvs/djangoproj/myproject/myproject/static_media
-    compass create stylesheets --syntax sass -r susy -u susy
-    cd /vagrant/.virtualenvs/djangoproj/myproject/myproject/static_media/stylesheeets/sass
-    rm _base.sass screen.sass
-    git clone https://github.com/jbergantine/compass-gesso/ .
-    touch ie.sass
-    cd /vagrant/.virtualenvs/djangoproj/myproject/myproject/static_media/
-    mkdir -p javascripts/libs
-    cd /vagrant/.virtualenvs/djangoproj/myproject/myproject/static_media/javascripts/libs
-    wget http://code.jquery.com/jquery-1.8.1.min.js
-    wget https://raw.github.com/gist/3868451/a313411f080ab542a703b805e4d1494bcbf23a0b/gistfile1.js -O modernizr.js
-    cd /vagrant/.virtualenvs/djangoproj/
-    git add -A
-    git commit -am "initial commit"
     echo "export DJANGO_SETTINGS_MODULE=myproject.settings.dev" >> $VIRTUAL_ENV/bin/postactivate
     echo "unset DJANGO_SETTINGS_MODULE" >> $VIRTUAL_ENV/bin/postdeactivate
     echo "cd /vagrant/.virtualenvs/djangoproj/myproject" >> /home/vagrant/.profile
   EOH
   not_if "test -d /vagrant/.virtualenvs/djangoproj/lib/python2.7/site-packages/django"
+end
+
+# Init Git Project and install post-merge hook
+bash "congiure git" do
+  user "vagrant"
+  code <<-EOH
+    cd /vagrant/.virtualenvs/djangoproj
+    git init
+    cd /vagrant/.virtualenvs/djangoproj/.git/hooks
+    wget https://raw.github.com/gist/3870080/c5a55674901db6b901cf3f6a4a11b28b0dde2738/gistfile1.sh -O post-merge
+    chmod u+x post-merge
+  EOH
+  not_if "ls /vagrant/.virtualenvs/djangoproj/.git/hooks | grep post-merge"
+end
+
+# Configure Static Media
+bash "configure static media" do
+  user "vagrant"
+  code <<-EOH
+    cd /vagrant/.virtualenvs/djangoproj/myproject/myproject
+    mkdir -p media static static_media static_media/javascripts/libs
+    cd static_media
+    compass create stylesheets --syntax sass -r susy -u susy
+    cd stylesheeets/sass
+    rm _base.sass screen.sass
+    git clone https://github.com/jbergantine/compass-gesso/ .
+    touch ie.sass
+    cd /vagrant/.virtualenvs/djangoproj/myproject/myproject/static_media/javascripts/libs
+    wget http://code.jquery.com/jquery-1.8.1.min.js
+    wget https://raw.github.com/gist/3868451/a313411f080ab542a703b805e4d1494bcbf23a0b/gistfile1.js -O modernizr.js
+    cd /vagrant/.virtualenvs/djangoproj/
+  EOH
+  not_if "ls /vagrant/.virtualenvs/djangoproj/myproject/myproject | static_media"
 end
