@@ -15,11 +15,11 @@ bash "configure virtualenvwrapper" do
 end
 
 # Create the Virtual Environment
-python_virtualenv "$HOME/.virtualenvs/djangoproj" do
+python_virtualenv "/home/vagrant/.virtualenvs/djangoproj" do
   interpreter "python2.7"
   owner "vagrant"
   action :create
-  not_if "test -d $HOME/.virtualenvs/djangoproj"
+  not_if "test -d /home/vagrant/.virtualenvs/djangoproj"
 end
 
 # Create Bash Aliases
@@ -96,8 +96,8 @@ end
 bash "install packages and start project" do
   user "vagrant"
   code <<-EOH
-    virtualenv ~/.virtualenvs/djangoproj
-    source ~/.virtualenvs/djangoproj/bin/activate
+    virtualenv /home/vagrant/.virtualenvs/djangoproj
+    source /home/vagrant/.virtualenvs/djangoproj/bin/activate
     cd /vagrant
     pip install -r https://raw.github.com/jbergantine/django-newproj-template/master/stable-req.txt
     django-admin.py startproject --template=https://github.com/jbergantine/django-newproj-template/zipball/master --extension=py,rst myproject
