@@ -43,6 +43,14 @@ bash "create aliases" do
   not_if "cat /home/vagrant/.profile | grep compass"
 end
 
+# Set Database permissions
+bash "database permissions" do
+  code <<-EOH
+    echo "local all all md5" >> /etc/postgresql/9.1/main/pg_hba.conf
+  EOH
+  not_if "cat /etc/postgresql/9.1/main/pg_hba.conf | grep 'local all all md5'"
+end
+
 # Configure Git
 bash "configure git" do
   code <<-EOH
