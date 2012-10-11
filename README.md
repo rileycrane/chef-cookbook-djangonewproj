@@ -40,7 +40,7 @@ When you run the script to create the project, the script downloads the latest v
 
 ## Bash Aliases
 
-The following bash aliases were added to the shell. 
+The following bash aliases are added to the shell. 
 
 ### Compass
 
