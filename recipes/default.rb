@@ -7,7 +7,7 @@ end
 bash "configure virtualenvwrapper" do
   user "vagrant"
   code <<-EOH
-    echo "export WORKON_HOME=/vagrant/.virtualenvs" >> /home/vagrant/.profile
+    echo "export WORKON_HOME=/vagrant" >> /home/vagrant/.profile
     echo "source /usr/local/bin/virtualenvwrapper.sh" >> /home/vagrant/.profile
     echo "workon djangoproj" >> /home/vagrant/.profile
   EOH
@@ -15,11 +15,11 @@ bash "configure virtualenvwrapper" do
 end
 
 # Create the Virtual Environment
-python_virtualenv "/vagrant/.virtualenvs/djangoproj" do
+python_virtualenv "$HOME/.virtualenvs/djangoproj" do
   interpreter "python2.7"
   owner "vagrant"
   action :create
-  not_if "test -d /vagrant/.virtualenvs/djangoproj"
+  not_if "test -d $HOME/.virtualenvs/djangoproj"
 end
 
 # Create Bash Aliases
@@ -96,38 +96,38 @@ end
 bash "install packages and start project" do
   user "vagrant"
   code <<-EOH
-    virtualenv /vagrant/.virtualenvs/djangoproj
-    source /vagrant/.virtualenvs/djangoproj/bin/activate
-    cd /vagrant/.virtualenvs/djangoproj
+    virtualenv ~/.virtualenvs/djangoproj
+    source ~/.virtualenvs/djangoproj/bin/activate
+    cd /vagrant
     pip install -r https://raw.github.com/jbergantine/django-newproj-template/master/stable-req.txt
     django-admin.py startproject --template=https://github.com/jbergantine/django-newproj-template/zipball/master --extension=py,rst myproject
-    cd /vagrant/.virtualenvs/djangoproj/myproject
+    cd /vagrant/myproject
     chmod u+x manage.py
     echo "export DJANGO_SETTINGS_MODULE=myproject.settings.dev" >> $VIRTUAL_ENV/bin/postactivate
     echo "unset DJANGO_SETTINGS_MODULE" >> $VIRTUAL_ENV/bin/postdeactivate
-    echo "cd /vagrant/.virtualenvs/djangoproj/myproject" >> /home/vagrant/.profile
+    echo "cd /vagrant/myproject" >> /home/vagrant/.profile
   EOH
-  not_if "test -d /vagrant/.virtualenvs/djangoproj/lib/python2.7/site-packages/django"
+  not_if "test -d /vagrant/lib/python2.7/site-packages/django"
 end
 
 # Init Git Project and install post-merge hook
 bash "congiure git" do
   user "vagrant"
   code <<-EOH
-    cd /vagrant/.virtualenvs/djangoproj
+    cd /vagrant
     git init
-    cd /vagrant/.virtualenvs/djangoproj/.git/hooks
+    cd /vagrant/.git/hooks
     wget https://raw.github.com/gist/3870080/c5a55674901db6b901cf3f6a4a11b28b0dde2738/gistfile1.sh -O post-merge
     chmod u+x post-merge
   EOH
-  not_if "ls /vagrant/.virtualenvs/djangoproj/.git/hooks | grep post-merge"
+  not_if "ls /vagrant/.git/hooks | grep post-merge"
 end
 
 # Configure Static Media
 bash "configure static media" do
   user "vagrant"
   code <<-EOH
-    cd /vagrant/.virtualenvs/djangoproj/myproject/myproject
+    cd /vagrant/myproject/myproject
     mkdir -p media static static_media static_media/javascripts/libs
     cd static_media
     compass create stylesheets --syntax sass -r susy -u susy
@@ -135,9 +135,9 @@ bash "configure static media" do
     rm _base.sass screen.sass
     git clone https://github.com/jbergantine/compass-gesso/ .
     touch ie.sass
-    cd /vagrant/.virtualenvs/djangoproj/myproject/myproject/static_media/javascripts/libs
+    cd /vagrant/myproject/myproject/static_media/javascripts/libs
     wget http://code.jquery.com/jquery-1.8.1.min.js
     wget https://raw.github.com/gist/3868451/a313411f080ab542a703b805e4d1494bcbf23a0b/gistfile1.js -O modernizr.js
   EOH
-  not_if "ls /vagrant/.virtualenvs/djangoproj/myproject/myproject | static_media"
+  not_if "ls /vagrant/myproject/myproject | static_media"
 end
