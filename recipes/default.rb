@@ -32,6 +32,13 @@ bash "create aliases" do
     echo "alias dj='python manage.py '" >> /home/vagrant/.profile
     echo "alias py='python'" >> /home/vagrant/.profile
     echo "alias pyclean='find . -name "*.pyc" -delete'" >> /home/vagrant/.profile
+    echo "alias ga='git add'" >> /home/vagrant/.profile
+    echo "alias gb='git branch'" >> /home/vagrant/.profile
+    echo "alias gco='git checkout'" >> /home/vagrant/.profile
+    echo "alias gl='git pull'" >> /home/vagrant/.profile
+    echo "alias gp='git push'" >> /home/vagrant/.profile
+    echo "alias gst='git status'" >> /home/vagrant/.profile
+    echo "alias gss='git status -s'" >> /home/vagrant/.profile
   EOH
   not_if "cat /home/vagrant/.profile | grep compass"
 end
