@@ -28,13 +28,11 @@ The main stylesheet. This imports ``_base.sass``, calls a reset and begins defin
 
 A stylesheet specifically for print styling. Meant to be used in a way that styles defined here override ``screen.sass``.
 
-**Replace ``siteURL.com`` with the site's domain name.**
+* In ``myproject/static_media/stylesheets/sass/print.sass``, replace ``siteURL.com`` with the site's domain name.
 
 ### ie.sass
 
 A stylesheet specifically for dealing with modifications necessary for Internet Explorer. Meant to be used in a way that styles defined here override screen.sass.
-
-* In ``myproject/static_media/stylesheets/sass/print.sass``, replace ``siteURL.com`` with the site's domain name.
 
 Because this template uses SASS with Compass and Susy you'll have to compile the ``.sass`` files to ``.css`` files. You can use ``compass watch`` or ``compass compile`` as documented in the [Compass documentation](http://compass-style.org/help/tutorials/command-line/).
 
