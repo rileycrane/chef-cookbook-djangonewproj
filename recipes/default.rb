@@ -7,11 +7,11 @@ end
 bash "configure virtualenvwrapper" do
   user "vagrant"
   code <<-EOH
-    echo "export WORKON_HOME=/vagrant" >> /home/vagrant/.profile
+    echo "export WORKON_HOME=/home/vagrant/.virtualenvs" >> /home/vagrant/.profile
     echo "source /usr/local/bin/virtualenvwrapper.sh" >> /home/vagrant/.profile
     echo "workon djangoproj" >> /home/vagrant/.profile
   EOH
-  not_if "cat /home/vagrant/.profile | grep virtualenvwrapper.sh"
+  not_if "cat /home/vagrant/.profile | grep /home/vagrant/.virtualenvs"
 end
 
 # Create the Virtual Environment
@@ -107,7 +107,7 @@ bash "install packages and start project" do
     echo "unset DJANGO_SETTINGS_MODULE" >> $VIRTUAL_ENV/bin/postdeactivate
     echo "cd /vagrant/myproject" >> /home/vagrant/.profile
   EOH
-  not_if "test -d /vagrant/lib/python2.7/site-packages/django"
+  not_if "test -d /home/vagrant/.virtualenvs/djangoproj/lib/python2.7/site-packages/django"
 end
 
 # Init Git Project and install post-merge hook
@@ -131,10 +131,10 @@ bash "configure static media" do
     mkdir -p media static static_media static_media/javascripts/libs
     cd static_media
     compass create stylesheets --syntax sass -r susy -u susy
-    cd stylesheeets/sass
+    cd stylesheets/sass
     rm _base.sass screen.sass
     git clone https://github.com/jbergantine/compass-gesso/ .
-    touch ie.sass
+    touch /vagrant/myproject/myproject/static_media/stylesheets/sass/ie.sass
     cd /vagrant/myproject/myproject/static_media/javascripts/libs
     wget http://code.jquery.com/jquery-1.8.1.min.js
     wget https://raw.github.com/gist/3868451/a313411f080ab542a703b805e4d1494bcbf23a0b/gistfile1.js -O modernizr.js
