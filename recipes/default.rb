@@ -96,6 +96,7 @@ end
 bash "install packages and start project" do
   user "vagrant"
   code <<-EOH
+    virtualenv /vagrant/.virtualenvs/djangoproj
     source /vagrant/.virtualenvs/djangoproj/bin/activate
     cd /vagrant/.virtualenvs/djangoproj
     pip install -r https://raw.github.com/jbergantine/django-newproj-template/master/stable-req.txt
@@ -137,7 +138,6 @@ bash "configure static media" do
     cd /vagrant/.virtualenvs/djangoproj/myproject/myproject/static_media/javascripts/libs
     wget http://code.jquery.com/jquery-1.8.1.min.js
     wget https://raw.github.com/gist/3868451/a313411f080ab542a703b805e4d1494bcbf23a0b/gistfile1.js -O modernizr.js
-    cd /vagrant/.virtualenvs/djangoproj/
   EOH
   not_if "ls /vagrant/.virtualenvs/djangoproj/myproject/myproject | static_media"
 end
