@@ -36,7 +36,7 @@ A stylesheet specifically for dealing with modifications necessary for Internet 
 
 ## JavaScript Files Created
 
-When you run the script to create the project, the script downloads the latest version of jQuery (which is then referenced both locally and via Google's AJAX load in base.html) as well as a customized basic version of modernizr.js which includes only the shims for the HTML5 doctype.
+When you run the script to create the project, the script downloads the latest version of jQuery (which is then referenced both locally and via Google's AJAX load in base.html) as well as a [customized basic version of modernizr.js](https://gist.github.com/3868451) which includes only the shims for the HTML5 doctype.
 
 ## Bash Aliases
 
