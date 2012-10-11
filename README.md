@@ -8,9 +8,9 @@ See the configuration instructions in the [Django Newproj Template](https://gith
 
 ## Git Hooks Created
 
-### post-merge
+### [post-merge](https://gist.github.com/3870080)
 
-A hook that runs every time a merge is made. A merge will happen every time `$ git pull` is executed (and there are changes to be brought in; it won't happen if there are no changes) in addition to the explicit `$ git merge` command. This hook will compile stylesheets, sync and migrate the database. This hook lives in `.git/hooks/post-merge` and can be disabled by either removing the file (`post-merge`) or making it non-executable. If you want to use Scout to compile SASS or use Tower or a similar application to manage Git you will want to disable or remove this hook as it relies on the presence of SASS, Compass, Susy, Django and a database among other things.
+A hook that runs every time a merge is made. A merge will happen every time `$ git pull` is executed (and there are changes to be brought in; it won't happen if there are no changes) in addition to the explicit `$ git merge` command. This hook will compile stylesheets, sync and migrate the database and install new requirements if ``stable-req.txt`` is updated. This hook lives in `.git/hooks/post-merge` and can be disabled by either removing the file (`post-merge`) or making it non-executable. If you want to use Scout to compile SASS or use Tower or a similar application to manage Git you will want to disable or remove this hook as it relies on the presence of SASS, Compass, Susy, Django and a database among other things.
 
 ## Stylesheets Created
 
