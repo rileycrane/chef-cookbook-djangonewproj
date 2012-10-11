@@ -44,6 +44,8 @@ bash "create aliases" do
 end
 
 # Set Database permissions
+# Gets around FATAL: Ident authentication failed for user “django_login” 
+# As mentioned at http://blog.iiilx.com/programming/how-to-install-postgres-on-ubuntu-for-django/
 bash "database permissions" do
   code <<-EOH
     echo "local all all md5" >> /etc/postgresql/9.1/main/pg_hba.conf
