@@ -128,12 +128,13 @@ bash "congiure git" do
   user "vagrant"
   code <<-EOH
     cd /vagrant
+    echo ".DS_Store\n.vagrant" >> .gitignore
     git init
     cd /vagrant/.git/hooks
     wget https://raw.github.com/gist/3870080/c5a55674901db6b901cf3f6a4a11b28b0dde2738/gistfile1.sh -O post-merge
     chmod u+x post-merge
   EOH
-  not_if "ls /vagrant/.git/hooks | grep post-merge"
+  not_if "ls /vagrant | grep .gitignore"
 end
 
 # Configure Static Media
