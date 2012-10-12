@@ -150,8 +150,8 @@ bash "configure static media" do
     git clone https://github.com/jbergantine/compass-gesso/ .
     touch /vagrant/myproject/myproject/static_media/stylesheets/sass/ie.sass
     cd /vagrant/myproject/myproject/static_media/javascripts/libs
-    wget http://code.jquery.com/jquery-1.8.1.min.js
-    wget https://raw.github.com/gist/3868451/a313411f080ab542a703b805e4d1494bcbf23a0b/gistfile1.js -O modernizr.js
+    wget http://code.jquery.com/jquery-1.8.2.min.js -O jquery.js
+    wget https://raw.github.com/gist/3868451/c5c71ef635a8f1d2b317f8940a8fdcb1afed533c/gistfile1.js -O modernizr.js
   EOH
   not_if "ls /vagrant/myproject/myproject | static_media"
 end
