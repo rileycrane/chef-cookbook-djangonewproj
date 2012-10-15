@@ -131,7 +131,7 @@ bash "congiure git" do
     echo ".DS_Store\n.vagrant" >> .gitignore
     git init
     cd /vagrant/.git/hooks
-    wget https://raw.github.com/gist/3870080/e2112597f980e11d0a21282d8434a5e8ff850ce5/gistfile1.sh -O post-merge
+    wget https://raw.github.com/gist/3870080/gistfile1.sh -O post-merge
     chmod u+x post-merge
   EOH
   not_if "ls /vagrant | grep .gitignore"
@@ -151,7 +151,7 @@ bash "configure static media" do
     touch /vagrant/myproject/myproject/static_media/stylesheets/sass/ie.sass
     cd /vagrant/myproject/myproject/static_media/javascripts/libs
     wget http://code.jquery.com/jquery-1.8.2.min.js -O jquery.js
-    wget https://raw.github.com/gist/3868451/c5c71ef635a8f1d2b317f8940a8fdcb1afed533c/gistfile1.js -O modernizr.js
+    wget https://raw.github.com/gist/3868451/gistfile1.js -O modernizr.js
   EOH
   not_if "ls /vagrant/myproject/myproject | static_media"
 end
