@@ -131,7 +131,7 @@ bash "congiure git" do
     echo ".DS_Store\n.vagrant" >> .gitignore
     git init
     cd /vagrant/.git/hooks
-    wget https://raw.github.com/gist/3870080/c5a55674901db6b901cf3f6a4a11b28b0dde2738/gistfile1.sh -O post-merge
+    wget https://raw.github.com/gist/3870080/518b8828e2e47bd52688892775bcef1d6eebbc54/gistfile1.sh -O post-merge
     chmod u+x post-merge
   EOH
   not_if "ls /vagrant | grep .gitignore"
