@@ -142,7 +142,7 @@ bash "configure static media" do
   user "vagrant"
   code <<-EOH
     cd /vagrant/myproject/myproject
-    mkdir -p media static static_media static_media/javascripts/libs
+    mkdir -p media static static_media/javascripts/libs
     cd static_media
     compass create stylesheets --syntax sass -r susy -u susy
     cd stylesheets/sass
