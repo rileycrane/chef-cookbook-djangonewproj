@@ -147,7 +147,12 @@ bash "configure static media" do
     compass create stylesheets --syntax sass -r susy -u susy
     cd stylesheets/sass
     rm _base.sass screen.sass
-    git clone https://github.com/jbergantine/compass-gesso/ .
+    wget https://github.com/jbergantine/compass-gesso/tarball/master -O master.tar.gz
+    tar -xvzf master.tar.gz
+    cd jbergantine*
+    mv *.sass ../
+    cd ..
+    rm -rf jbergantine* master.tar.gz
     touch /vagrant/myproject/myproject/static_media/stylesheets/sass/ie.sass
     cd /vagrant/myproject/myproject/static_media/javascripts/libs
     wget http://code.jquery.com/jquery-1.8.2.min.js -O jquery.js
