@@ -158,5 +158,5 @@ bash "configure static media" do
     wget http://code.jquery.com/jquery-1.8.2.min.js -O jquery.js
     wget https://raw.github.com/gist/3868451/gistfile1.js -O modernizr.js
   EOH
-  not_if "ls /vagrant/myproject/myproject | static_media"
+  not_if "ls /vagrant/myproject/myproject | grep static_media"
 end
