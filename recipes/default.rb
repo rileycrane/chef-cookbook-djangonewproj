@@ -134,7 +134,7 @@ bash "congiure git" do
     wget https://raw.github.com/gist/3870080/gistfile1.sh -O post-merge
     chmod u+x post-merge
   EOH
-  not_if "ls /vagrant | grep .gitignore"
+  not_if "ls -al /vagrant | grep .gitignore"
 end
 
 # Configure Static Media
