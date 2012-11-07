@@ -168,15 +168,8 @@ bash "configure static media" do
     cd /vagrant/myproject/myproject/static_media/javascripts/libs
     wget http://code.jquery.com/jquery-1.8.2.min.js -O jquery.js
     wget https://raw.github.com/gist/3868451/gistfile1.js -O modernizr.js
-  EOH
-  not_if "ls /vagrant/myproject/myproject | grep static_media"
-end
-
-bash "initial git commit" do
-  user "vagrant"
-  code <<-EOH
     cd /vagrant
     git add -A
-    git commit -am "initial commit"
-  EOH
+    git commit -am "initial commit"  EOH
+  not_if "ls /vagrant/myproject/myproject | grep static_media"
 end
