@@ -123,18 +123,27 @@ bash "install packages and start project" do
   not_if "test -d /home/vagrant/.virtualenvs/djangoproj/lib/python2.7/site-packages/django"
 end
 
-# Init Git Project and install post-merge hook
-bash "congiure git" do
+# Init Git Project (this is a backup in case it got missed for some reason)
+bash "init git" do
+  user "vagrant"
+  code <<-EOH
+    cd /vagrant
+    git init
+  EOH
+  not_if "ls -a /vagrant | grep .git$"
+end
+
+# Install .gitignore and post-merge hook
+bash "congiure gitignore" do
   user "vagrant"
   code <<-EOH
     cd /vagrant
     echo ".DS_Store\n.vagrant" >> .gitignore
-    git init
     cd /vagrant/.git/hooks
     wget https://raw.github.com/gist/3870080/gistfile1.sh -O post-merge
     chmod u+x post-merge
   EOH
-  not_if "ls -al /vagrant | grep .gitignore"
+  not_if "ls -a /vagrant | grep .gitignore"
 end
 
 # Configure Static Media
