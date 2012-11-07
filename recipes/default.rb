@@ -170,6 +170,7 @@ bash "configure static media" do
     wget https://raw.github.com/gist/3868451/gistfile1.js -O modernizr.js
     cd /vagrant
     git add -A
-    git commit -am "initial commit"  EOH
+    git commit -am "initial commit"
+  EOH
   not_if "ls /vagrant/myproject/myproject | grep static_media"
 end
