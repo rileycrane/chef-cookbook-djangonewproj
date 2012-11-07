@@ -22,8 +22,7 @@ python_virtualenv "/home/vagrant/.virtualenvs/djangoproj" do
   not_if "test -d /home/vagrant/.virtualenvs/djangoproj"
 end
 
-# Create Bash Aliases, configure custom colors
-# Custom colors from https://wiki.archlinux.org/index.php/Color_Bash_Prompt
+# Create Bash Aliases, append custom colors
 bash "create aliases" do
   user "vagrant"
   code <<-EOH
@@ -40,7 +39,7 @@ bash "create aliases" do
     echo "alias gp='git push'" >> /home/vagrant/.profile
     echo "alias gst='git status'" >> /home/vagrant/.profile
     echo "alias gss='git status -s'" >> /home/vagrant/.profile
-    echo "PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]'" >> /home/vagrant/.profile
+    wget -q -O - https://raw.github.com/gist/4004242/prompt.sh >> foo.txt
   EOH
   not_if "cat /home/vagrant/.profile | grep compass"
 end
