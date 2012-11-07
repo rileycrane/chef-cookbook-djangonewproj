@@ -39,7 +39,7 @@ bash "create aliases" do
     echo "alias gp='git push'" >> /home/vagrant/.profile
     echo "alias gst='git status'" >> /home/vagrant/.profile
     echo "alias gss='git status -s'" >> /home/vagrant/.profile
-    wget -q -O - https://raw.github.com/gist/4004242/prompt.sh >> foo.txt
+    wget -q -O - https://raw.github.com/gist/4004242/prompt.sh >> /home/vagrant/.profile
   EOH
   not_if "cat /home/vagrant/.profile | grep compass"
 end
