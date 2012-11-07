@@ -171,3 +171,12 @@ bash "configure static media" do
   EOH
   not_if "ls /vagrant/myproject/myproject | grep static_media"
 end
+
+bash "initial git commit" do
+  user "vagrant"
+  code <<-EOH
+    cd /vagrant
+    git add -A
+    git commit -am "initial commit"
+  EOH
+end
