@@ -42,7 +42,7 @@ bash "create aliases" do
     echo "alias frs='foreman start -f Procfile.dev'" >> /home/vagrant/.profile
     wget -q -O - https://raw.github.com/gist/4004242/prompt.sh >> /home/vagrant/.profile
   EOH
-  not_if "cat /home/vagrant/.profile | grep compass"
+  not_if "cat /home/vagrant/.profile | grep foreman"
 end
 
 # Set Database permissions
