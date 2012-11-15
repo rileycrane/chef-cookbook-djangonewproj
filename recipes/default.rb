@@ -39,6 +39,7 @@ bash "create aliases" do
     echo "alias gp='git push'" >> /home/vagrant/.profile
     echo "alias gst='git status'" >> /home/vagrant/.profile
     echo "alias gss='git status -s'" >> /home/vagrant/.profile
+    echo "alias frs='foreman start -f Procfile.dev'" >> /home/vagrant/.profile
     wget -q -O - https://raw.github.com/gist/4004242/prompt.sh >> /home/vagrant/.profile
   EOH
   not_if "cat /home/vagrant/.profile | grep compass"
@@ -98,6 +99,7 @@ gems = Array.new
 gems |= %w/
   compass
   susy
+  foreman
 /
 
 gems.each do |gem|
