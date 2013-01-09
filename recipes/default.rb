@@ -168,7 +168,7 @@ bash "configure static media" do
     rm -rf jbergantine* master.tar.gz
     touch /vagrant/myproject/myproject/static_media/stylesheets/sass/ie.sass
     cd /vagrant/myproject/myproject/static_media/javascripts/libs
-    wget http://code.jquery.com/jquery-1.8.2.min.js -O jquery.js
+    wget http://code.jquery.com/jquery-1.8.3.min.js -O jquery.js
     wget https://raw.github.com/gist/3868451/gistfile1.js -O modernizr.js
     cd /vagrant
     git add -A
