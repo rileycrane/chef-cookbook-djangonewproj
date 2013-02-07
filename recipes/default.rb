@@ -137,6 +137,17 @@ bash "init git" do
   not_if "ls -a /vagrant | grep .git$"
 end
 
+# Create branches for development and production
+bash "git branch" do
+  user "vagrant"
+  code <<-EOH
+    cd /vagrant
+    git branch development
+    git branch production
+  EOH
+  not_if "git branch | grep 'development'"
+end
+
 # Install .gitignore and post-merge hook
 bash "congiure gitignore" do
   user "vagrant"
