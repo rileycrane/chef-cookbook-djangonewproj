@@ -120,7 +120,7 @@ bash "install packages and start project" do
     django-admin.py startproject --template=https://github.com/jbergantine/django-newproj-template/zipball/master --extension=py,rst myproject
     cd /vagrant/myproject
     chmod u+x manage.py
-    echo "export DJANGO_SETTINGS_MODULE=myproject.settings.dev" >> $VIRTUAL_ENV/bin/postactivate
+    echo "export DJANGO_SETTINGS_MODULE=myproject.settings.development" >> $VIRTUAL_ENV/bin/postactivate
     echo "unset DJANGO_SETTINGS_MODULE" >> $VIRTUAL_ENV/bin/postdeactivate
     echo "cd /vagrant/myproject" >> /home/vagrant/.profile
   EOH
