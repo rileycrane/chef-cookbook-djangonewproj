@@ -51,7 +51,7 @@ end
 # As mentioned at http://blog.iiilx.com/programming/how-to-install-postgres-on-ubuntu-for-django/
 bash "database permissions" do
   code <<-EOH
-    sed -ie 's/local   all         all                               ident/#local   all         all                               ident/g' /etc/postgresql/9.1/main/pg_hba.conf
+    sed -ie 's/local   all             all                                     ident/#local   all             all                                     ident/g' /etc/postgresql/9.1/main/pg_hba.conf
     echo "local all all md5" >> /etc/postgresql/9.1/main/pg_hba.conf
     echo "local django_db django_login md5" >> /etc/postgresql/9.1/main/pg_hba.conf
     /etc/init.d/postgresql restart
