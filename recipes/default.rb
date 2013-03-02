@@ -128,24 +128,16 @@ bash "install packages and start project" do
 end
 
 # Init Git Project (this is a backup in case it got missed for some reason)
+# Create branches for development and production
 bash "init git" do
   user "vagrant"
   code <<-EOH
     cd /vagrant
     git init
-  EOH
-  not_if "ls -a /vagrant | grep .git$"
-end
-
-# Create branches for development and production
-bash "git branch" do
-  user "vagrant"
-  code <<-EOH
-    cd /vagrant
     git branch development
     git branch production
   EOH
-  not_if "git branch | grep 'development'"
+  not_if "ls -a /vagrant | grep .git$"
 end
 
 # Install .gitignore and post-merge hook
